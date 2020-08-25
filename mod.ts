@@ -104,7 +104,8 @@ class Spinner {
   #prefix: string = "";
 
   set spinner(spin: string | SpinnerAnimation) {
-    if (typeof spin === "string") this.#spinner = spinners[spin];
+    if (Deno.build.os === "windows") this.#spinner = spinners.line;
+    else if (typeof spin === "string") this.#spinner = spinners[spin];
     else this.#spinner = spin;
   }
 
@@ -152,7 +153,7 @@ class Spinner {
 
     if (this.isSpinning) return this;
 
-    if (this.#opts.hideCursor) {
+    if (this.#opts.hideCursor && Deno.build.os !== "windows") {
       tty.hideCursorSync(this.#stream);
       onExit(() => {
         tty.showCursorSync(this.#stream);
