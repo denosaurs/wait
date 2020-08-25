@@ -4,6 +4,7 @@ import spinners from "./spinners.ts";
 
 import { symbols } from "./log_symbols.ts";
 import { onExit } from "https://deno.land/x/exit@0.0.1/mod.ts";
+
 type ColorFunction = (message: string) => string;
 const colormap: { [key: string]: ColorFunction } = {
   black: colors.black,
@@ -104,6 +105,7 @@ class Spinner {
   #prefix: string = "";
 
   set spinner(spin: string | SpinnerAnimation) {
+    this.#frameIndex = 0;
     if (Deno.build.os === "windows") this.#spinner = spinners.line;
     else if (typeof spin === "string") this.#spinner = spinners[spin];
     else this.#spinner = spin;
