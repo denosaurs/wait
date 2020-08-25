@@ -4,6 +4,7 @@ const spinner = wait("Loading mesozoic").start();
 
 setTimeout(() => {
   spinner.color = "yellow";
+  spinner.spinner = "shark";
   spinner.text = "Loading meteorite";
 }, 1000);
 
