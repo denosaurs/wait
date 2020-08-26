@@ -60,7 +60,7 @@ export function wait(opts: string | SpinnerOptions) {
   });
 }
 
-class Spinner {
+export class Spinner {
   #opts: Required<SpinnerOptions>;
 
   isSpinning: boolean;
