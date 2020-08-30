@@ -3,7 +3,6 @@ import { colors, encode, tty } from "./deps.ts";
 import spinners from "./spinners.ts";
 
 import { symbols } from "./log_symbols.ts";
-import { onExit } from "https://deno.land/x/exit@0.0.1/mod.ts";
 
 type ColorFunction = (message: string) => string;
 const colormap: { [key: string]: ColorFunction } = {
@@ -157,9 +156,6 @@ export class Spinner {
 
     if (this.#opts.hideCursor && Deno.build.os !== "windows") {
       tty.hideCursorSync(this.#stream);
-      onExit(() => {
-        tty.showCursorSync(this.#stream);
-      });
     }
 
     this.render();
