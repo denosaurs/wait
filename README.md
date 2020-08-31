@@ -6,7 +6,7 @@
 
 <p align="center">
 	<br>
-	<img src="assets/basic.svg" width="500">
+	<img src="assets/example.svg" width="500">
 	<br>
 </p>
 
