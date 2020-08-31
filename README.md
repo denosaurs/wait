@@ -4,27 +4,35 @@
 [![CI Status](https://img.shields.io/github/workflow/status/denosaurs/wait/check)](https://github.com/denosaurs/wait/actions)
 [![License](https://img.shields.io/github/license/denosaurs/wait)](https://github.com/denosaurs/wait/blob/master/LICENSE)
 
+<p align="center">
+	<br>
+	<img src="assets/basic.svg" width="500">
+	<br>
+</p>
+
+## Usage
+
 ```typescript
 import { wait } from "https://deno.land/x/wait/mod.ts";
 
-const spinner = wait("Loading mesozoic").start();
+const spinner = wait("Generating terrain").start();
 
 setTimeout(() => {
   spinner.color = "yellow";
-  spinner.text = "Loading meteorite";
-}, 1000);
-
-setTimeout(() => {
-  spinner.succeed("Started human race");
-}, 2000);
+  spinner.text = "Loading dinosaurs";
+}, 1500);
 ```
 
-## other
+## Other
 
-### contribution
+### Related
+
+- [ora](https://github.com/sindresorhus/ora) - Elegant terminal spinner
+
+### Contribution
 
 Pull request, issues and feedback are very welcome. Code style is formatted with deno fmt and commit messages are done following Conventional Commits spec.
 
-### licence
+### Licence
 
 Copyright 2020-present, the denosaurs team. All rights reserved. MIT license.
