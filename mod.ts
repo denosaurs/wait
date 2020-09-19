@@ -230,7 +230,8 @@ export class Spinner {
     const fullText = typeof text === "string" ? " " + text : "";
 
     this.stop();
-    this.write(`${fullPrefix}${options.symbol || " "}${fullText}\n`);
+    // https://github.com/denoland/deno/issues/6001
+    console.log(`${fullPrefix}${options.symbol || " "}${fullText}\n`);
   }
 
   succeed(text?: string) {

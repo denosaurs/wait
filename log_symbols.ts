@@ -1,10 +1,9 @@
 import { colors } from "./deps.ts";
 
-let supported = Deno.build.os !== "windows";
+let supported = true;
 
 if ((await Deno.permissions.query({ name: "env" })).state === "granted") {
-  supported = supported &&
-    (!!Deno.env.get("CI") || Deno.env.get("TERM") === "xterm-256color");
+  supported = supported && (!!Deno.env.get("CI") || Deno.env.get("TERM") === "xterm-256color");
 }
 
 const main = {
