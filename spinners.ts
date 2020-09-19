@@ -1,4 +1,4 @@
-import { SpinnerAnimation } from "./mod.ts";
+import type { SpinnerAnimation } from "./mod.ts";
 
 export default <{ [key: string]: SpinnerAnimation }> {
   dots: {
