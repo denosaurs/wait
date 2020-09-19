@@ -154,7 +154,7 @@ export class Spinner {
 
     if (this.isSpinning) return this;
 
-    if (this.#opts.hideCursor && Deno.build.os !== "windows") {
+    if (this.#opts.hideCursor) {
       tty.hideCursorSync(this.#stream);
     }
 
