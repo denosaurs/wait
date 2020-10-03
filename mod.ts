@@ -96,6 +96,12 @@ export class Spinner {
     this.#enabled = typeof opts.enabled === "boolean"
       ? opts.enabled
       : tty.isInteractive(this.#stream);
+
+    if (opts.hideCursor) {
+      window.addEventListener("unload", () => {
+        tty.showCursorSync(this.#stream);
+      });
+    }
   }
 
   #spinner: SpinnerAnimation = spinners.dots;
