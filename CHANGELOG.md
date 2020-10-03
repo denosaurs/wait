@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
+## [0.1.8] - 2020-10-03
+
+### Bug Fixes
+
+- potentially fix #2 ([`ad76632`])
+- remove stray newline ([`2188df1`])
+- :bug: hide cursor on Windows ([`75c5fdd`])
+
 ## [0.1.7] - 2020-09-19
 
 ### Bug Fixes
@@ -56,6 +64,10 @@ and this project adheres to [Semantic Versioning].
 
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
+[0.1.8]: https://github.com/denosaurs/wait/compare/0.1.7...0.1.8
+[`ad76632`]: https://github.com/denosaurs/wait/commit/ad76632c798d32eabd1dc3bcb1d90c8f6cd02522
+[`2188df1`]: https://github.com/denosaurs/wait/commit/2188df1f09b57acd52dfc812afad39d3c33e8e7a
+[`75c5fdd`]: https://github.com/denosaurs/wait/commit/75c5fdd6fe68f8b4fc0685bc86382cc49dd5a816
 [0.1.7]: https://github.com/denosaurs/wait/compare/0.1.6...0.1.7
 [`ef26621`]: https://github.com/denosaurs/wait/commit/ef26621583edff99bf04e37386144fbbcceb0107
 [`cc86f35`]: https://github.com/denosaurs/wait/commit/cc86f3515936006ea981d0ec20fe07c7e672902c
