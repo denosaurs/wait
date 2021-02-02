@@ -111,8 +111,7 @@ export class Spinner {
 
   set spinner(spin: string | SpinnerAnimation) {
     this.#frameIndex = 0;
-    if (Deno.build.os === "windows") this.#spinner = spinners.line;
-    else if (typeof spin === "string") this.#spinner = spinners[spin];
+    if (typeof spin === "string") this.#spinner = spinners[spin];
     else this.#spinner = spin;
   }
 
