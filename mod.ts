@@ -1,8 +1,10 @@
-import { colors, encode, tty } from "./deps.ts";
+import { colors, tty } from "./deps.ts";
 
 import spinners from "./spinners.ts";
 
 import { symbols } from "./log_symbols.ts";
+
+const encoder = new TextEncoder();
 
 type ColorFunction = (message: string) => string;
 const colormap: { [key: string]: ColorFunction } = {
@@ -68,7 +70,7 @@ export class Spinner {
   indent: number;
   interval: number;
 
-  #id: number = 0;
+  #id = 0;
 
   #enabled: boolean;
   #frameIndex: number;
@@ -106,8 +108,8 @@ export class Spinner {
 
   #spinner: SpinnerAnimation = spinners.dots;
   #color: ColorFunction = colors.cyan;
-  #text: string = "";
-  #prefix: string = "";
+  #text = "";
+  #prefix = "";
 
   set spinner(spin: string | SpinnerAnimation) {
     this.#frameIndex = 0;
@@ -146,7 +148,7 @@ export class Spinner {
   }
 
   private write(data: string) {
-    this.#stream.writeSync(encode(data));
+    this.#stream.writeSync(encoder.encode(data));
   }
 
   start(): Spinner {

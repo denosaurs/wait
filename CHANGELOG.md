@@ -2,14 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog],
-and this project adheres to [Semantic Versioning].
+The format is based on [Keep a Changelog], and this project adheres to
+[Semantic Versioning].
 
 ## [0.1.10] - 2021-02-02
 
 ### Bug Fixes
 
-- disable windows check in favour of setting encoding yourself on windows ([`74b6e34`])
+- disable windows check in favour of setting encoding yourself on windows
+  ([`74b6e34`])
 
 ## [0.1.9] - 2020-11-21
 
