@@ -205,7 +205,14 @@ export class Spinner {
   }
 
   updateLines(): void {
-    const columns = Deno.consoleSize(this.#stream.rid)?.columns || 80;
+    let columns = 80;
+
+    try {
+      columns = Deno.consoleSize(this.#stream.rid)?.columns ?? columns;
+    } catch {
+      // Unstable APIs is not enabled, fallback to default
+    }
+
     const fullPrefixText = typeof this.prefix === "string"
       ? this.prefix + "-"
       : "";
