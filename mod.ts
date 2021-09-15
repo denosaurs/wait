@@ -208,6 +208,7 @@ export class Spinner {
     let columns = 80;
 
     try {
+      //@ts-ignore TS2339
       columns = Deno.consoleSize(this.#stream.rid)?.columns ?? columns;
     } catch {
       // Unstable APIs is not enabled, fallback to default
