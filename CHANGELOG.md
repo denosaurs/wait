@@ -5,14 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog], and this project adheres to
 [Semantic Versioning].
 
+## [0.1.12] - 2021-09-15
+
+### Bug Fixes
+
+- workers and lint error ([`bae9932`])
+
 ## [0.1.11] - 2021-06-06
 
 ## [0.1.10] - 2021-02-02
 
 ### Bug Fixes
 
-- disable windows check in favour of setting encoding yourself on windows
-  ([`74b6e34`])
+- disable windows check in favour of setting encoding yourself on windows ([`74b6e34`])
 
 ## [0.1.9] - 2020-11-21
 
@@ -75,6 +80,8 @@ The format is based on [Keep a Changelog], and this project adheres to
 
 [keep a changelog]: https://keepachangelog.com/en/1.0.0/
 [semantic versioning]: https://semver.org/spec/v2.0.0.html
+[0.1.12]: https://github.com/denosaurs/wait/compare/0.1.11...0.1.12
+[`bae9932`]: https://github.com/denosaurs/wait/commit/bae99325e72a16544701bad50962147b40dd090d
 [0.1.11]: https://github.com/denosaurs/wait/compare/0.1.10...0.1.11
 [0.1.10]: https://github.com/denosaurs/wait/compare/0.1.9...0.1.10
 [`74b6e34`]: https://github.com/denosaurs/wait/commit/74b6e3498e6df91960ff2454e361b9863ec8ee78
