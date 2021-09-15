@@ -100,7 +100,7 @@ export class Spinner {
       : tty.isInteractive(this.#stream);
 
     if (opts.hideCursor) {
-      window.addEventListener("unload", () => {
+      addEventListener("unload", () => {
         tty.showCursorSync(this.#stream);
       });
     }
