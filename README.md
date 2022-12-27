@@ -1,7 +1,7 @@
 # wait
 
 [![Tags](https://img.shields.io/github/release/denosaurs/wait)](https://github.com/denosaurs/wait/releases)
-[![CI Status](https://img.shields.io/github/workflow/status/denosaurs/wait/deno)](https://github.com/denosaurs/wait/actions)
+[![CI Status](https://img.shields.io/github/actions/workflow/status/denosaurs/wait/deno.yml?branch=master)](https://github.com/denosaurs/wait/actions)
 [![License](https://img.shields.io/github/license/denosaurs/wait)](https://github.com/denosaurs/wait/blob/master/LICENSE)
 
 <p align="center">
