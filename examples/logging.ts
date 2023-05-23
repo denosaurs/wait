@@ -1,6 +1,10 @@
 import { wait } from "../mod.ts";
 
-const spinner = wait({ text: "Generating\nterrain", color: "red", interceptConsole: true })
+const spinner = wait({
+  text: "Generating\nterrain",
+  color: "red",
+  interceptConsole: true,
+});
 
 spinner.start();
 
@@ -15,16 +19,12 @@ setTimeout(() => {
   spinner.color = "yellow";
   spinner.text = "Loading dinosaurs";
   console.table([{ a: 1, b: "Y" }, { a: "Z", b: 2 }]);
-
-
-
 }, 2000);
 
 setTimeout(() => {
   spinner.color = "blue";
   spinner.text = "Loading beasts";
   console.timeEnd("test");
-
 }, 3000);
 
 setTimeout(() => {
@@ -35,17 +35,12 @@ setTimeout(() => {
   console.dirxml({ a: 1, b: "Y" });
   console.count("count");
   console.countReset("count");
-
-
 }, 3500);
-
 
 setTimeout(() => {
   spinner.succeed("Mesozoic deployed!");
 }, 4000);
 
-
 setTimeout(() => {
   console.error("byee");
-
 }, 5000);

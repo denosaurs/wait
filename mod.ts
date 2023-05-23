@@ -117,9 +117,24 @@ export class Spinner {
   #text = "";
   #prefix = "";
 
-
   #interceptConsole() {
-    const methods = ["log", "warn", "error", "info", "debug", "time", "timeEnd", "trace", "dir", "assert", "count", "countReset", "table", "dirxml", "timeLog"];
+    const methods = [
+      "log",
+      "warn",
+      "error",
+      "info",
+      "debug",
+      "time",
+      "timeEnd",
+      "trace",
+      "dir",
+      "assert",
+      "count",
+      "countReset",
+      "table",
+      "dirxml",
+      "timeLog",
+    ];
     for (const method of methods) {
       const original = (console as any)[method];
       (console as any)[method] = (...args: unknown[]) => {
