@@ -35,12 +35,31 @@ export interface SpinnerOptions {
   stream?: Deno.WriterSync & { rid: number };
   enabled?: boolean;
   discardStdin?: boolean;
+  interceptConsole?: boolean;
 }
 
 export interface PersistOptions {
   prefix?: string;
   symbol?: string;
   text?: string;
+}
+
+export interface Console {
+  log: typeof console.log;
+  warn: typeof console.warn;
+  error: typeof console.error;
+  info: typeof console.info;
+  debug: typeof console.debug;
+  time: typeof console.time;
+  timeEnd: typeof console.timeEnd;
+  trace: typeof console.trace;
+  dir: typeof console.dir;
+  assert: typeof console.assert;
+  count: typeof console.count;
+  countReset: typeof console.countReset;
+  table: typeof console.table;
+  dirxml: typeof console.dirxml;
+  timeLog: typeof console.timeLog;
 }
 
 export function wait(opts: string | SpinnerOptions) {
@@ -58,6 +77,7 @@ export function wait(opts: string | SpinnerOptions) {
     stream: opts.stream ?? Deno.stdout,
     enabled: true,
     discardStdin: true,
+    interceptConsole: opts.interceptConsole ?? true,
   });
 }
 
@@ -104,12 +124,49 @@ export class Spinner {
         tty.showCursorSync(this.#stream);
       });
     }
+
+    if (opts.interceptConsole) {
+      this.#interceptConsole();
+    }
   }
 
   #spinner: SpinnerAnimation = spinners.dots;
   #color: ColorFunction = colors.cyan;
   #text = "";
   #prefix = "";
+
+  #interceptConsole() {
+    const methods: (keyof Console)[] = [
+      "log",
+      "warn",
+      "error",
+      "info",
+      "debug",
+      "time",
+      "timeEnd",
+      "trace",
+      "dir",
+      "assert",
+      "count",
+      "countReset",
+      "table",
+      "dirxml",
+      "timeLog",
+    ];
+    for (const method of methods) {
+      const original = (console as Console)[method];
+      (console as Console)[method] = (...args: unknown[]) => {
+        if (this.isSpinning) {
+          this.stop();
+          this.clear();
+          original(...args);
+          this.start();
+        } else {
+          original(...args);
+        }
+      };
+    }
+  }
 
   set spinner(spin: string | SpinnerAnimation) {
     this.#frameIndex = 0;
@@ -164,7 +221,7 @@ export class Spinner {
     if (this.#opts.hideCursor) {
       tty.hideCursorSync(this.#stream);
     }
-
+    this.isSpinning = true;
     this.render();
     this.#id = setInterval(this.render.bind(this), this.interval);
     return this;
@@ -206,7 +263,6 @@ export class Spinner {
 
   updateLines(): void {
     let columns = 80;
-
     try {
       //@ts-ignore TS2339
       columns = Deno.consoleSize(this.#stream.rid)?.columns ?? columns;
@@ -217,6 +273,7 @@ export class Spinner {
     const fullPrefixText = typeof this.prefix === "string"
       ? this.prefix + "-"
       : "";
+
     this.#linesCount = tty
       .stripAnsi(fullPrefixText + "--" + this.text)
       .split("\n")
@@ -231,6 +288,7 @@ export class Spinner {
     this.#id = -1;
     this.#frameIndex = 0;
     this.clear();
+    this.isSpinning = false;
     if (this.#opts.hideCursor) {
       tty.showCursorSync(this.#stream);
     }
