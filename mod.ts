@@ -44,6 +44,24 @@ export interface PersistOptions {
   text?: string;
 }
 
+export interface Console {
+  log: typeof console.log;
+  warn: typeof console.warn;
+  error: typeof console.error;
+  info: typeof console.info;
+  debug: typeof console.debug;
+  time: typeof console.time;
+  timeEnd: typeof console.timeEnd;
+  trace: typeof console.trace;
+  dir: typeof console.dir;
+  assert: typeof console.assert;
+  count: typeof console.count;
+  countReset: typeof console.countReset;
+  table: typeof console.table;
+  dirxml: typeof console.dirxml;
+  timeLog: typeof console.timeLog;
+}
+
 export function wait(opts: string | SpinnerOptions) {
   if (typeof opts === "string") {
     opts = { text: opts };
@@ -118,7 +136,7 @@ export class Spinner {
   #prefix = "";
 
   #interceptConsole() {
-    const methods = [
+    const methods: (keyof Console)[] = [
       "log",
       "warn",
       "error",
@@ -136,8 +154,8 @@ export class Spinner {
       "timeLog",
     ];
     for (const method of methods) {
-      const original = (console as any)[method];
-      (console as any)[method] = (...args: unknown[]) => {
+      const original = (console as Console)[method];
+      (console as Console)[method] = (...args: unknown[]) => {
         if (this.isSpinning) {
           this.stop();
           this.clear();
