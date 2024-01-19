@@ -304,7 +304,7 @@ export class Spinner {
 
     this.stop();
     // https://github.com/denoland/deno/issues/6001
-    console.log(`${fullPrefix}${options.symbol || " "}${fullText}`);
+    this.write(`${fullPrefix}${options.symbol || " "}${fullText}\n`);
   }
 
   succeed(text?: string) {
