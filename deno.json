@@ -1,0 +1,13 @@
+{
+  "name": "@denosaurs/wait",
+  "version": "0.2.0",
+  "exports": {
+    ".": "./mod.ts",
+    "./spinners": "./spinners.ts",
+    "./log_symbols": "./log_symbols.ts"
+  },
+  "imports": {
+    "@denosaurs/tty": "jsr:@denosaurs/tty@^0.2.1",
+    "@std/fmt": "jsr:@std/fmt@^1"
+  }
+}

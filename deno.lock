@@ -1,0 +1,28 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@denosaurs/tty@^0.2.0": "jsr:@denosaurs/tty@0.2.0",
+      "jsr:@denosaurs/tty@^0.2.1": "jsr:@denosaurs/tty@0.2.1",
+      "jsr:@std/fmt@^1.0.2": "jsr:@std/fmt@1.0.2"
+    },
+    "jsr": {
+      "@denosaurs/tty@0.2.0": {
+        "integrity": "7bffd8da2faf026ed71e6a2292f058f49beda831bc9d8d8e141fb2f844f23b08"
+      },
+      "@denosaurs/tty@0.2.1": {
+        "integrity": "f1fc651cc9021c90bf230a45c6eb893c26a54fae6a855e9cd26aad0083d772dd"
+      },
+      "@std/fmt@1.0.2": {
+        "integrity": "87e9dfcdd3ca7c066e0c3c657c1f987c82888eb8103a3a3baa62684ffeb0f7a7"
+      }
+    }
+  },
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@denosaurs/tty@^0.2.0",
+      "jsr:@std/fmt@^1.0.2"
+    ]
+  }
+}
