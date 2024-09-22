@@ -1,8 +1,10 @@
-import { colors, tty } from "./deps.ts";
+import * as colors from "@std/fmt/colors";
+import * as tty from "@denosaurs/tty";
 
 import spinners from "./spinners.ts";
-
 import { symbols } from "./log_symbols.ts";
+
+export { spinners, symbols };
 
 const encoder = new TextEncoder();
 
@@ -32,7 +34,7 @@ export interface SpinnerOptions {
   hideCursor?: boolean;
   indent?: number;
   interval?: number;
-  stream?: Deno.WriterSync & { rid: number };
+  stream?: tty.SyncStream;
   enabled?: boolean;
   discardStdin?: boolean;
   interceptConsole?: boolean;
@@ -62,7 +64,7 @@ export interface Console {
   timeLog: typeof console.timeLog;
 }
 
-export function wait(opts: string | SpinnerOptions) {
+export function wait(opts: string | SpinnerOptions): Spinner {
   if (typeof opts === "string") {
     opts = { text: opts };
   }
@@ -86,7 +88,7 @@ export class Spinner {
 
   isSpinning: boolean;
 
-  #stream: Deno.WriterSync & { rid: number };
+  #stream: tty.SyncStream;
   indent: number;
   interval: number;
 
@@ -135,7 +137,7 @@ export class Spinner {
   #text = "";
   #prefix = "";
 
-  #interceptConsole() {
+  #interceptConsole(): void {
     const methods: (keyof Console)[] = [
       "log",
       "warn",
@@ -174,7 +176,7 @@ export class Spinner {
     else this.#spinner = spin;
   }
 
-  get spinner() {
+  get spinner(): SpinnerAnimation {
     return this.#spinner;
   }
 
@@ -183,7 +185,7 @@ export class Spinner {
     else this.#color = color;
   }
 
-  get color() {
+  get color(): ColorFunction {
     return this.#color;
   }
 
@@ -192,7 +194,7 @@ export class Spinner {
     this.updateLines();
   }
 
-  get text() {
+  get text(): string {
     return this.#text;
   }
   set prefix(value: string) {
@@ -200,18 +202,18 @@ export class Spinner {
     this.updateLines();
   }
 
-  get prefix() {
+  get prefix(): string {
     return this.#prefix;
   }
 
-  private write(data: string) {
+  #write(data: string): void {
     this.#stream.writeSync(encoder.encode(data));
   }
 
   start(): Spinner {
     if (!this.#enabled) {
       if (this.text) {
-        this.write(`- ${this.text}\n`);
+        this.#write(`- ${this.text}\n`);
       }
       return this;
     }
@@ -229,7 +231,7 @@ export class Spinner {
 
   render(): void {
     this.clear();
-    this.write(`${this.frame()}\n`);
+    this.#write(`${this.frame()}\n`);
     this.updateLines();
     this.#linesToClear = this.#linesCount;
   }
@@ -282,7 +284,7 @@ export class Spinner {
       }, 0);
   }
 
-  stop() {
+  stop(): void {
     if (!this.#enabled) return;
     clearInterval(this.#id);
     this.#id = -1;
@@ -294,7 +296,7 @@ export class Spinner {
     }
   }
 
-  stopAndPersist(options: PersistOptions = {}) {
+  stopAndPersist(options: PersistOptions = {}): void {
     const prefix = options.prefix || this.prefix;
     const fullPrefix = typeof prefix === "string" && prefix !== ""
       ? prefix + " "
@@ -304,22 +306,22 @@ export class Spinner {
 
     this.stop();
     // https://github.com/denoland/deno/issues/6001
-    this.write(`${fullPrefix}${options.symbol || " "}${fullText}\n`);
+    this.#write(`${fullPrefix}${options.symbol || " "}${fullText}\n`);
   }
 
-  succeed(text?: string) {
+  succeed(text?: string): void {
     return this.stopAndPersist({ symbol: symbols.success, text });
   }
 
-  fail(text?: string) {
+  fail(text?: string): void {
     return this.stopAndPersist({ symbol: symbols.error, text });
   }
 
-  warn(text?: string) {
+  warn(text?: string): void {
     return this.stopAndPersist({ symbol: symbols.warning, text });
   }
 
-  info(text?: string) {
+  info(text?: string): void {
     return this.stopAndPersist({ symbol: symbols.info, text });
   }
 }
