@@ -148,6 +148,7 @@ export class Spinner {
     ];
     for (const method of methods) {
       const original = console[method] as (...args: unknown[]) => void;
+      // @ts-ignore Ignore the next line for dnt to type check properly
       console[method] = (...args: unknown[]) => {
         if (this.isSpinning) {
           this.stop();
